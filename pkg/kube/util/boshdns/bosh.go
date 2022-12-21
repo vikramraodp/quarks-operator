@@ -136,7 +136,7 @@ func (dns *BoshDomainNameService) Deployment(namespace string, corednsServiceAcc
 								{MountPath: "/etc/coredns", Name: volumeName, ReadOnly: true},
 							},
 							ReadinessProbe: &corev1.Probe{
-								Handler: corev1.Handler{
+								ProbeHandler: corev1.ProbeHandler{
 									HTTPGet: &corev1.HTTPGetAction{
 										Path:   "/health",
 										Port:   intstr.FromInt(8080),
@@ -149,7 +149,7 @@ func (dns *BoshDomainNameService) Deployment(namespace string, corednsServiceAcc
 								TimeoutSeconds:   1,
 							},
 							LivenessProbe: &corev1.Probe{
-								Handler: corev1.Handler{
+								ProbeHandler: corev1.ProbeHandler{
 									HTTPGet: &corev1.HTTPGetAction{
 										Path:   "/health",
 										Port:   intstr.FromInt(8080),

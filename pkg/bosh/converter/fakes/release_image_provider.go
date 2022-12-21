@@ -33,15 +33,16 @@ func (fake *FakeReleaseImageProvider) GetReleaseImage(arg1 string, arg2 string) 
 		arg1 string
 		arg2 string
 	}{arg1, arg2})
+	stub := fake.GetReleaseImageStub
+	fakeReturns := fake.getReleaseImageReturns
 	fake.recordInvocation("GetReleaseImage", []interface{}{arg1, arg2})
 	fake.getReleaseImageMutex.Unlock()
-	if fake.GetReleaseImageStub != nil {
-		return fake.GetReleaseImageStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.getReleaseImageReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 

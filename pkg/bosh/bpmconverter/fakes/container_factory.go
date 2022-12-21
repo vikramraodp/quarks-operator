@@ -63,15 +63,16 @@ func (fake *FakeContainerFactory) JobsToContainers(arg1 []manifest.Job, arg2 []v
 		arg2 []v1.VolumeMount
 		arg3 manifest.Disks
 	}{arg1Copy, arg2Copy, arg3})
+	stub := fake.JobsToContainersStub
+	fakeReturns := fake.jobsToContainersReturns
 	fake.recordInvocation("JobsToContainers", []interface{}{arg1Copy, arg2Copy, arg3})
 	fake.jobsToContainersMutex.Unlock()
-	if fake.JobsToContainersStub != nil {
-		return fake.JobsToContainersStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.jobsToContainersReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -139,15 +140,16 @@ func (fake *FakeContainerFactory) JobsToInitContainers(arg1 []manifest.Job, arg2
 		arg3 manifest.Disks
 		arg4 *string
 	}{arg1Copy, arg2Copy, arg3, arg4})
+	stub := fake.JobsToInitContainersStub
+	fakeReturns := fake.jobsToInitContainersReturns
 	fake.recordInvocation("JobsToInitContainers", []interface{}{arg1Copy, arg2Copy, arg3, arg4})
 	fake.jobsToInitContainersMutex.Unlock()
-	if fake.JobsToInitContainersStub != nil {
-		return fake.JobsToInitContainersStub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.jobsToInitContainersReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 

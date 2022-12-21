@@ -3,13 +3,14 @@ package v1alpha1
 import (
 	"fmt"
 
-	extv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
+	extv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	apis "code.cloudfoundry.org/quarks-operator/pkg/kube/apis"
 	"code.cloudfoundry.org/quarks-utils/pkg/pointers"
+
+	"code.cloudfoundry.org/quarks-operator/pkg/kube/apis"
 )
 
 // This file looks almost the same for all controllers

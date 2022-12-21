@@ -50,15 +50,16 @@ func (fake *FakeVolumeFactory) GenerateBPMDisks(arg1 *manifest.InstanceGroup, ar
 		arg2 bpm.Configs
 		arg3 string
 	}{arg1, arg2, arg3})
+	stub := fake.GenerateBPMDisksStub
+	fakeReturns := fake.generateBPMDisksReturns
 	fake.recordInvocation("GenerateBPMDisks", []interface{}{arg1, arg2, arg3})
 	fake.generateBPMDisksMutex.Unlock()
-	if fake.GenerateBPMDisksStub != nil {
-		return fake.GenerateBPMDisksStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.generateBPMDisksReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -115,15 +116,16 @@ func (fake *FakeVolumeFactory) GenerateDefaultDisks(arg1 *manifest.InstanceGroup
 		arg2 string
 		arg3 string
 	}{arg1, arg2, arg3})
+	stub := fake.GenerateDefaultDisksStub
+	fakeReturns := fake.generateDefaultDisksReturns
 	fake.recordInvocation("GenerateDefaultDisks", []interface{}{arg1, arg2, arg3})
 	fake.generateDefaultDisksMutex.Unlock()
-	if fake.GenerateDefaultDisksStub != nil {
-		return fake.GenerateDefaultDisksStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.generateDefaultDisksReturns
 	return fakeReturns.result1
 }
 

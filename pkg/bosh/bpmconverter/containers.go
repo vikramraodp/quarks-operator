@@ -7,13 +7,14 @@ import (
 
 	"github.com/pkg/errors"
 	corev1 "k8s.io/api/core/v1"
-	resource "k8s.io/apimachinery/pkg/api/resource"
+	"k8s.io/apimachinery/pkg/api/resource"
+
+	"code.cloudfoundry.org/quarks-utils/pkg/names"
 
 	"code.cloudfoundry.org/quarks-operator/pkg/bosh/bpm"
 	bdm "code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
 	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/logrotate"
 	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/operatorimage"
-	"code.cloudfoundry.org/quarks-utils/pkg/names"
 )
 
 func (c *ContainerFactoryImpl) JobsToContainers(
@@ -362,9 +363,9 @@ func generateBPMCommand(
 	return command, args
 }
 
-func newDrainScript(jobName string, processCount string) *corev1.Handler {
+func newDrainScript(jobName string, processCount string) *corev1.LifecycleHandler {
 	drainScript := filepath.Join(VolumeJobsDirMountPath, jobName, "bin", "drain")
-	return &corev1.Handler{
+	return &corev1.LifecycleHandler{
 		Exec: &corev1.ExecAction{
 			Command: []string{
 				"/bin/sh",
@@ -409,8 +410,8 @@ echo "Done"`,
 	}
 }
 
-func newDrainWait(processCount string) *corev1.Handler {
-	return &corev1.Handler{
+func newDrainWait(processCount string) *corev1.LifecycleHandler {
+	return &corev1.LifecycleHandler{
 		Exec: &corev1.ExecAction{
 			Command: []string{
 				"/bin/sh",

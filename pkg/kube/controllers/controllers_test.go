@@ -9,7 +9,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/afero"
 
-	admissionregistration "k8s.io/api/admissionregistration/v1beta1"
+	admissionregistration "k8s.io/api/admissionregistration/v1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/api/meta"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
@@ -19,13 +19,14 @@ import (
 	crc "sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/controllers"
-	cfakes "code.cloudfoundry.org/quarks-operator/pkg/kube/controllers/fakes"
-	"code.cloudfoundry.org/quarks-operator/testing"
 	"code.cloudfoundry.org/quarks-utils/pkg/config"
 	"code.cloudfoundry.org/quarks-utils/pkg/credsgen"
 	gfakes "code.cloudfoundry.org/quarks-utils/pkg/credsgen/fakes"
 	cmdhelper "code.cloudfoundry.org/quarks-utils/testing"
+
+	"code.cloudfoundry.org/quarks-operator/pkg/kube/controllers"
+	cfakes "code.cloudfoundry.org/quarks-operator/pkg/kube/controllers/fakes"
+	"code.cloudfoundry.org/quarks-operator/testing"
 )
 
 var _ = Describe("Controllers", func() {
@@ -69,7 +70,7 @@ var _ = Describe("Controllers", func() {
 			manager.GetSchemeReturns(scheme.Scheme)
 
 			manager.GetClientReturns(client)
-			//manager.GetRecorderReturns(recorder)
+			// manager.GetRecorderReturns(recorder)
 			manager.GetRESTMapperReturns(restMapper)
 
 			manager.GetWebhookServerReturns(&webhook.Server{})

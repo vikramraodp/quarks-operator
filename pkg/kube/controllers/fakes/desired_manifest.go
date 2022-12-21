@@ -35,15 +35,16 @@ func (fake *FakeDesiredManifest) DesiredManifest(arg1 context.Context, arg2 stri
 		arg1 context.Context
 		arg2 string
 	}{arg1, arg2})
+	stub := fake.DesiredManifestStub
+	fakeReturns := fake.desiredManifestReturns
 	fake.recordInvocation("DesiredManifest", []interface{}{arg1, arg2})
 	fake.desiredManifestMutex.Unlock()
-	if fake.DesiredManifestStub != nil {
-		return fake.DesiredManifestStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.desiredManifestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 

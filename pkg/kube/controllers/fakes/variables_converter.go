@@ -42,15 +42,16 @@ func (fake *FakeVariablesConverter) Variables(arg1 string, arg2 string, arg3 []m
 		arg2 string
 		arg3 []manifest.Variable
 	}{arg1, arg2, arg3Copy})
+	stub := fake.VariablesStub
+	fakeReturns := fake.variablesReturns
 	fake.recordInvocation("Variables", []interface{}{arg1, arg2, arg3Copy})
 	fake.variablesMutex.Unlock()
-	if fake.VariablesStub != nil {
-		return fake.VariablesStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.variablesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 

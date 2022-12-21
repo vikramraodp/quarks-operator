@@ -7,11 +7,14 @@ import (
 
 	"github.com/pkg/errors"
 	batchv1 "k8s.io/api/batch/v1"
-	batchv1b1 "k8s.io/api/batch/v1beta1"
+	// batchv1b1 "k8s.io/api/batch/v1beta1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	qjv1a1 "code.cloudfoundry.org/quarks-job/pkg/kube/apis/quarksjob/v1alpha1"
+	"code.cloudfoundry.org/quarks-utils/pkg/names"
+	"code.cloudfoundry.org/quarks-utils/pkg/versionedsecretstore"
+
 	"code.cloudfoundry.org/quarks-operator/pkg/bosh/bpmconverter"
 	"code.cloudfoundry.org/quarks-operator/pkg/bosh/converter"
 	bdm "code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
@@ -19,8 +22,6 @@ import (
 	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/desiredmanifest"
 	boshnames "code.cloudfoundry.org/quarks-operator/pkg/kube/util/names"
 	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/operatorimage"
-	"code.cloudfoundry.org/quarks-utils/pkg/names"
-	"code.cloudfoundry.org/quarks-utils/pkg/versionedsecretstore"
 )
 
 const (
@@ -230,7 +231,7 @@ func (f *JobFactory) releaseImageQJob(namespace string, deploymentName string, d
 				Strategy: qjv1a1.TriggerOnce,
 			},
 			UpdateOnConfigChange: true,
-			Template: batchv1b1.JobTemplateSpec{
+			Template: batchv1.JobTemplateSpec{
 				Spec: batchv1.JobSpec{
 					Template: corev1.PodTemplateSpec{
 						ObjectMeta: metav1.ObjectMeta{

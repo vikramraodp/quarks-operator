@@ -47,15 +47,16 @@ func (fake *FakeInterpolator) AddOps(arg1 []byte) error {
 	fake.addOpsArgsForCall = append(fake.addOpsArgsForCall, struct {
 		arg1 []byte
 	}{arg1Copy})
+	stub := fake.AddOpsStub
+	fakeReturns := fake.addOpsReturns
 	fake.recordInvocation("AddOps", []interface{}{arg1Copy})
 	fake.addOpsMutex.Unlock()
-	if fake.AddOpsStub != nil {
-		return fake.AddOpsStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.addOpsReturns
 	return fakeReturns.result1
 }
 
@@ -112,15 +113,16 @@ func (fake *FakeInterpolator) Interpolate(arg1 []byte) ([]byte, error) {
 	fake.interpolateArgsForCall = append(fake.interpolateArgsForCall, struct {
 		arg1 []byte
 	}{arg1Copy})
+	stub := fake.InterpolateStub
+	fakeReturns := fake.interpolateReturns
 	fake.recordInvocation("Interpolate", []interface{}{arg1Copy})
 	fake.interpolateMutex.Unlock()
-	if fake.InterpolateStub != nil {
-		return fake.InterpolateStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.interpolateReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 

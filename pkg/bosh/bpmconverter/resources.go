@@ -8,20 +8,21 @@ import (
 
 	appsv1 "k8s.io/api/apps/v1"
 	batchv1 "k8s.io/api/batch/v1"
-	batchv1b1 "k8s.io/api/batch/v1beta1"
+	// batchv1b1 "k8s.io/api/batch/v1beta1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
 
 	qjv1a1 "code.cloudfoundry.org/quarks-job/pkg/kube/apis/quarksjob/v1alpha1"
+	qstsv1a1 "code.cloudfoundry.org/quarks-statefulset/pkg/kube/apis/quarksstatefulset/v1alpha1"
+	"code.cloudfoundry.org/quarks-statefulset/pkg/kube/controllers/statefulset"
+	"code.cloudfoundry.org/quarks-utils/pkg/pointers"
+
 	"code.cloudfoundry.org/quarks-operator/pkg/bosh/bpm"
 	bdm "code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
 	bdv1 "code.cloudfoundry.org/quarks-operator/pkg/kube/apis/boshdeployment/v1alpha1"
 	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/boshdns"
 	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/names"
-	qstsv1a1 "code.cloudfoundry.org/quarks-statefulset/pkg/kube/apis/quarksstatefulset/v1alpha1"
-	"code.cloudfoundry.org/quarks-statefulset/pkg/kube/controllers/statefulset"
-	"code.cloudfoundry.org/quarks-utils/pkg/pointers"
 )
 
 var (
@@ -376,7 +377,7 @@ func (kc *BPMConverter) quarksJob(
 			Trigger: qjv1a1.Trigger{
 				Strategy: strategy,
 			},
-			Template: batchv1b1.JobTemplateSpec{
+			Template: batchv1.JobTemplateSpec{
 				Spec: batchv1.JobSpec{
 					BackoffLimit: instanceGroup.Env.AgentEnvBoshConfig.Agent.Settings.JobBackoffLimit,
 					Template: corev1.PodTemplateSpec{

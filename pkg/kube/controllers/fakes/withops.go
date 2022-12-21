@@ -38,15 +38,16 @@ func (fake *FakeWithOps) Manifest(arg1 context.Context, arg2 *v1alpha1.BOSHDeplo
 		arg2 *v1alpha1.BOSHDeployment
 		arg3 string
 	}{arg1, arg2, arg3})
+	stub := fake.ManifestStub
+	fakeReturns := fake.manifestReturns
 	fake.recordInvocation("Manifest", []interface{}{arg1, arg2, arg3})
 	fake.manifestMutex.Unlock()
-	if fake.ManifestStub != nil {
-		return fake.ManifestStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.manifestReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 

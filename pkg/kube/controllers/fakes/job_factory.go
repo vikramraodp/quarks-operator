@@ -42,15 +42,16 @@ func (fake *FakeJobFactory) InstanceGroupManifestJob(arg1 string, arg2 string, a
 		arg4 converter.LinkInfos
 		arg5 bool
 	}{arg1, arg2, arg3, arg4, arg5})
+	stub := fake.InstanceGroupManifestJobStub
+	fakeReturns := fake.instanceGroupManifestJobReturns
 	fake.recordInvocation("InstanceGroupManifestJob", []interface{}{arg1, arg2, arg3, arg4, arg5})
 	fake.instanceGroupManifestJobMutex.Unlock()
-	if fake.InstanceGroupManifestJobStub != nil {
-		return fake.InstanceGroupManifestJobStub(arg1, arg2, arg3, arg4, arg5)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4, arg5)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.instanceGroupManifestJobReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 

@@ -10,21 +10,22 @@ import (
 	"go.uber.org/zap"
 
 	v1 "k8s.io/api/admission/v1"
-	admissionregistration "k8s.io/api/admissionregistration/v1beta1"
+	admissionregistration "k8s.io/api/admissionregistration/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/runtime/inject"
 	"sigs.k8s.io/controller-runtime/pkg/webhook/admission"
 
-	"code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
-	bdv1 "code.cloudfoundry.org/quarks-operator/pkg/kube/apis/boshdeployment/v1alpha1"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/withops"
 	"code.cloudfoundry.org/quarks-utils/pkg/config"
 	"code.cloudfoundry.org/quarks-utils/pkg/logger"
 	"code.cloudfoundry.org/quarks-utils/pkg/monitorednamespace"
 	"code.cloudfoundry.org/quarks-utils/pkg/names"
 	wh "code.cloudfoundry.org/quarks-utils/pkg/webhook"
+
+	"code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
+	bdv1 "code.cloudfoundry.org/quarks-operator/pkg/kube/apis/boshdeployment/v1alpha1"
+	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/withops"
 )
 
 // NewBOSHDeploymentValidator creates a validating hook for BOSHDeployment and adds it to the Manager
@@ -86,7 +87,7 @@ func NewValidator(log *zap.SugaredLogger, config *config.Config) admission.Handl
 	}
 }
 
-//Handle validates a BOSHDeployment
+// Handle validates a BOSHDeployment
 func (v *Validator) Handle(ctx context.Context, req admission.Request) admission.Response {
 	boshDeployment := &bdv1.BOSHDeployment{}
 

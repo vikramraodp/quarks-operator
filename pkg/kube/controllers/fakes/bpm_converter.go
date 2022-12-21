@@ -48,15 +48,16 @@ func (fake *FakeBPMConverter) Resources(arg1 manifest.Manifest, arg2 string, arg
 		arg7 bpm.Configs
 		arg8 string
 	}{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8})
+	stub := fake.ResourcesStub
+	fakeReturns := fake.resourcesReturns
 	fake.recordInvocation("Resources", []interface{}{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8})
 	fake.resourcesMutex.Unlock()
-	if fake.ResourcesStub != nil {
-		return fake.ResourcesStub(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.resourcesReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 

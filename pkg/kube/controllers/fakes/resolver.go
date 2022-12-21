@@ -43,15 +43,16 @@ func (fake *FakeInterpolateSecrets) InterpolateVariableFromSecrets(arg1 context.
 		arg3 string
 		arg4 string
 	}{arg1, arg2Copy, arg3, arg4})
+	stub := fake.InterpolateVariableFromSecretsStub
+	fakeReturns := fake.interpolateVariableFromSecretsReturns
 	fake.recordInvocation("InterpolateVariableFromSecrets", []interface{}{arg1, arg2Copy, arg3, arg4})
 	fake.interpolateVariableFromSecretsMutex.Unlock()
-	if fake.InterpolateVariableFromSecretsStub != nil {
-		return fake.InterpolateVariableFromSecretsStub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.interpolateVariableFromSecretsReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 

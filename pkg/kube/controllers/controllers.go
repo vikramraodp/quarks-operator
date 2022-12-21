@@ -7,23 +7,24 @@ import (
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 
-	extv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
+	extv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 
 	qjv1a1 "code.cloudfoundry.org/quarks-job/pkg/kube/apis/quarksjob/v1alpha1"
-	bdv1 "code.cloudfoundry.org/quarks-operator/pkg/kube/apis/boshdeployment/v1alpha1"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/controllers/boshdeployment"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/controllers/quarkslink"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/controllers/quarksrestart"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/controllers/versionedsecret"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/controllers/waitservice"
 	qsv1a1 "code.cloudfoundry.org/quarks-secret/pkg/kube/apis/quarkssecret/v1alpha1"
 	qstsv1a1 "code.cloudfoundry.org/quarks-statefulset/pkg/kube/apis/quarksstatefulset/v1alpha1"
 	"code.cloudfoundry.org/quarks-utils/pkg/config"
 	"code.cloudfoundry.org/quarks-utils/pkg/credsgen"
 	"code.cloudfoundry.org/quarks-utils/pkg/ctxlog"
 	"code.cloudfoundry.org/quarks-utils/pkg/webhook"
+
+	bdv1 "code.cloudfoundry.org/quarks-operator/pkg/kube/apis/boshdeployment/v1alpha1"
+	"code.cloudfoundry.org/quarks-operator/pkg/kube/controllers/boshdeployment"
+	"code.cloudfoundry.org/quarks-operator/pkg/kube/controllers/quarkslink"
+	"code.cloudfoundry.org/quarks-operator/pkg/kube/controllers/quarksrestart"
+	"code.cloudfoundry.org/quarks-operator/pkg/kube/controllers/versionedsecret"
+	"code.cloudfoundry.org/quarks-operator/pkg/kube/controllers/waitservice"
 )
 
 const (
