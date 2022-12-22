@@ -11,7 +11,8 @@ output_dir="$GIT_ROOT/helm"
 
 # https://semver.org/#semantic-versioning-200
 # helm does not accept a leading 'v'
-version=$(echo "$ARTIFACT_VERSION" | sed 's/^v//')
+#version=$(echo "$ARTIFACT_VERSION" | sed 's/^v//')
+version=$(git rev-parse --abbrev-ref HEAD | sed 's/^v//')
 # helm considers any version with a dash to be a pre-release
 version=$(echo "$version" | sed 's/-/+/')
 
@@ -22,7 +23,7 @@ ruby -pi -e "sub /repository: .*/, 'repository: $DOCKER_IMAGE_REPOSITORY'" "$out
 ruby -pi -e "sub /org: .*/, 'org: $DOCKER_IMAGE_ORG'" "$output_dir/quarks/values.yaml"
 ruby -pi -e "sub /tag: .*/, 'tag: $DOCKER_IMAGE_TAG'" "$output_dir/quarks/values.yaml"
 ruby -ryaml > "$output_dir/quarks/requirements.yaml" <<EOF
-  url = 'https://cloudfoundry-incubator.github.io/quarks-helm'
+  url = 'https://vikramraodp.github.io/quarks-helm'
   puts({'dependencies' => [
     {'name' => 'quarks-job', 'version' => '$QUARKS_JOB_HELM_VERSION', 'repository' => url},
     {'name' => 'quarks-secret', 'version' => '$QUARKS_SECRET_HELM_VERSION', 'repository' => url},
